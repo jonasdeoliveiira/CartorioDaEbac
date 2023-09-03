@@ -61,6 +61,30 @@ int registrar() //função responsável por cadastrar os usuários do sistema
 	fclose(file);
 	
 	system("pause");
+	
+	system("cls");
+	
+	int opcao=0;
+	
+	printf("Deseja registrar outro usuário?:\n"); 
+	printf("\t1 - sim\n");
+	printf("\t2 - não\n");
+	printf("Opcao: ");
+	
+	scanf("%d", &opcao);
+	
+	system("cls");
+	
+	if(opcao == 1)
+	{
+		registrar();
+	}
+	
+	if(opcao == 2)
+	{
+		return 0;
+	}
+	
 }
 
 int consultar()
@@ -71,27 +95,55 @@ int consultar()
 	printf("Digite o CPF a ser consultado: ");
 	scanf("%s",cpf);
 	
+	system("cls");
+	
 	FILE *file;
 	file = fopen(cpf,"r");
 	
 	if(file == NULL)
 	{
-		printf("Não foi possível abrir o arquivo, não localizado!\n");
+		printf("Não foi possível abrir o arquivo. Não localizado!\n\n");
+		system("pause");
 	}
 	
 	while(fgets(conteudo, 200, file) != NULL)
 	{
-		printf("\nEssas são as informações do usuário: ");
+		printf("Essas são as informações do usuário: \n\n");
 		printf("%s", conteudo);
 		printf("\n\n");
+		system("pause");
 	}
 	fclose(file);
-	system("pause");
+	
+	system("cls");
+	
+	int opcao=0;
+	
+	printf("Deseja consultar outro usuário?:\n\n"); 
+	printf("\t1 - sim\n");
+	printf("\t2 - não\n\n");
+	printf("Opcao: ");
+	
+	scanf("%d", &opcao);
+	
+	system("cls");
+	
+	if(opcao == 1)
+	{
+		consultar();
+	}
+	
+	if(opcao == 2)
+	{
+		return 0;
+	}
+	
 }
 
 int deletar()
 {
 	char cpf[40];
+	char conteudo[200];
 	
 	printf("Digite o CPF do usuário a ser deletado: ");
 	scanf("%s",cpf);
@@ -99,21 +151,97 @@ int deletar()
 	FILE *file;
 	file = fopen(cpf,"r");
 	
+	system("cls");
+	
 	if(file == NULL)
 	{
 		printf("O usuário não foi encontrado no sistema!\n");
 		system("pause");
+		
+		system("cls");
+		
+		int opcao=0;
+				
+		printf("Deseja procurar outro usuário para deletar?:\n"); 
+		printf("\t1 - sim\n");
+		printf("\t2 - não\n\n");
+		printf("Opcao: ");
+			
+		scanf("%d", &opcao);
+		
+		system("cls");
+				
+		if(opcao == 1)
+		{
+			deletar();
+		}
+		
+		if(opcao == 2)
+		{
+			return 0;
+		}
 	}
 	
-	if(file != NULL)
+	while(fgets(conteudo, 200, file) != NULL)
 	{
-		printf("O usuário foi deletado do sistema!\n");
-		system("pause");
+		printf("Essas são as informações do usuário que será deletado: \n\n");
+		printf("%s", conteudo);
+		
+		
+		int opcao=0;
+			
+		printf("\n\nConfirmar exclusão?:\n"); 
+		printf("\t1 - sim\n");
+		printf("\t2 - não\n\n");
+		printf("Opcao: ");
+			
+		scanf("%d", &opcao);
+		
+		fclose(file);
+		system("cls");
+		
+		if(opcao == 1)
+		{
+			printf("O usuário foi deletado do sistema!\n");
+			system("pause");
+			
+			system("cls");
+			
+			int opcao=0;
+					
+			printf("Deseja procurar outro usuário para deletar?:\n"); 
+			printf("\t1 - sim\n");
+			printf("\t2 - não\n\n");
+			printf("Opcao: ");
+						
+			scanf("%d", &opcao);
+				
+			system("cls");
+					
+			if(opcao == 1)
+			{
+				deletar();
+			}
+			
+			if(opcao == 2)
+			{
+				int main();
+			}
+									
+		}
+		
+		if(opcao == 2)
+		{
+			printf("Usuário não deletado!\n");
+			system("pause");
+		}
+		
 	}
 	fclose(file);
 	remove(cpf);
-	
+
 }
+	
 
 int main() 
 	{
@@ -130,7 +258,7 @@ int main()
 		printf("Escolha as opções desejadas do menu:\n\n");
 		printf("\t1 - Registrar nomes\n");
 		printf("\t2 - Consultar nomes\n");
-		printf("\t3 - Deletar nomes\n\n");
+		printf("\t3 - Deletar nomes\n");
 		printf("\t4 - Sair do sistema\n\n");
 		printf("Opcao: "); //fim do menu
 			
